@@ -1,6 +1,6 @@
 const sum = function(...acc) {
     /**
-     * Function to make continious sum of numbers or string
+     * Function to make continious sum of numbers or strings
      * Example: sum(1)(2)()
      */
     if ( acc.length == 0 ) {
@@ -9,7 +9,7 @@ const sum = function(...acc) {
         console.error("Method should receive one or zero arguments");
         return undefined;
     } else if ( typeof(acc[0]) != 'number' && typeof(acc[0]) != 'string') {
-        console.error("Only numbers and string allowed");
+        console.error("Only numbers and string are allowed");
         return undefined;
     } else {
         return function(...extra) {
