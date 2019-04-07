@@ -1,10 +1,10 @@
 async function promiseReduce(asyncFunctions, reduceFunc, initialValue) {
-    var reducedValue = initialValue;
-    for ( i = 0; i < asyncFunctions.length; ++i ) {
-        let data = await asyncFunctions[i]();
-        reducedValue = reduceFunc(reducedValue, data);
+    var acc = initialValue;
+    for ( const func of asyncFunctions ) {
+        let data = await func();
+        acc = reduceFunc(acc, data);
     };
-    return reducedValue;
+    return acc;
 };
 
 var fn1 = () => { return Promise.resolve(4) }
@@ -24,7 +24,7 @@ let result = promiseReduce(
 async function asyncAssert(promise, reference, msg) {
     var data = await promise;
     console.assert(
-        data.length === reference.length 
+        data.length === reference.length
             && data.every((value, index) => value === reference[index]),
         msg);
 };
