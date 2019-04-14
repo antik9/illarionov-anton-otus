@@ -1,14 +1,14 @@
 /* Imports */
 const request = require('request');
-const conf = require('./conf.js');
+const conf = require('./conf.json');
 
 /* Constants */
 const args = process.argv.slice(2);
-const number_of_queries = Number.parseInt(args[0]);
-const request_type = args[1];
+const numberOfQueries = Number.parseInt(args[0]);
+const requestType = args[1];
 
 /* Functions */
-async function get_response() {
+async function getResponse() {
     return await new Promise(resolve => {
         request(`http://${conf.host}:${conf.port}`, (error, response, body) => {
             resolve(body);
@@ -17,17 +17,17 @@ async function get_response() {
 }
 
 /* Main */
-if (request_type == 'parallel' && number_of_queries > 0) {
-    console.log(`Start ${number_of_queries} parallel queries.....\n`);
-    [...Array(number_of_queries)].forEach(async _ => {
-        console.log(await get_response());
+if (requestType === 'parallel' && numberOfQueries > 0) {
+    console.log(`Start ${numberOfQueries} parallel queries.....\n`);
+    [...Array(numberOfQueries)].forEach(async _ => {
+        console.log(await getResponse());
     });
-} else if (request_type == 'sequential' && number_of_queries > 0) {
-    console.log(`Start ${number_of_queries} sequential queries.....\n`);
+} else if (requestType === 'sequential' && numberOfQueries > 0) {
+    console.log(`Start ${numberOfQueries} sequential queries.....\n`);
     (
         async _ => {
-            for (const i of Array(number_of_queries)) {
-                console.log(await get_response());
+            for (const i of Array(numberOfQueries)) {
+                console.log(await getResponse());
             };
         }
     )();

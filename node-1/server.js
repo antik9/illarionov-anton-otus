@@ -1,7 +1,7 @@
 /* Imports */
 const http = require('http');
-const conf = require('./conf.js');
-  
+const conf = require('./conf.json');
+
 /* Functions */
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
