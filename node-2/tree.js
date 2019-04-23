@@ -10,27 +10,23 @@ const rootDir = args[0];
 let lockCounter = 1;
 
 /* Functions */
-const go = (root, Tree) => {
+const go = (root, fileTree) => {
     try {
         fs.readdir(root, (err, paths) => {
-            if (paths != undefined) {
-                observePaths(Tree, root, paths);
-            }
+            if (paths != undefined && observePaths(fileTree, root, paths));
             --lockCounter;
         });
     } catch (err) { --lockCounter; }
 };
 
-const observePaths = (Tree, root, paths) => {
+const observePaths = (fileTree, root, paths) => {
     statLockCounter = paths.length;
     lockCounter += statLockCounter;
     try {
         paths.forEach(__file => {
             const file = pathMod.join(root, __file);
             fs.lstat(file, (err, stat) => {
-                if (stat != undefined) {
-                    push(Tree, file, stat);
-                }
+                if (stat != undefined && push(fileTree, file, stat));
                 --lockCounter;
                 --statLockCounter;
             });
@@ -38,13 +34,13 @@ const observePaths = (Tree, root, paths) => {
     } catch (err) { lockCounter -= statLockCounter; }
 }
 
-const push = (Tree, file, stat) => {
+const push = (fileTree, file, stat) => {
     if (stat.isDirectory()) {
-        Tree.dirs.push(file);
+        fileTree.dirs.push(file);
         ++lockCounter;
-        go(file, Tree);
+        go(file, fileTree);
     } else {
-        Tree.files.push(file);
+        fileTree.files.push(file);
     }
 }
 
