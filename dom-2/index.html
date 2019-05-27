@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <title> Custom Elements Tree </title>
+  <script src="./tree.js"></script>
+  <my-tree data='
+{
+  "id": 1,
+  "items": [
+    {
+      "id": 2,
+      "items": [
+        {
+          "id": 3
+        },
+        {
+          "id": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "items": [
+        {
+          "id": 6,
+          "items": [
+            {
+              "id": 7
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "items": [
+            {
+              "id": 9
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+  '></my-tree>
+</html>
