@@ -2,20 +2,20 @@
     <table>
         <tbody>
             <tr>
-                <td style="text-align:left">{{ minValue }}</td>
-                <td style="text-align:right">{{ maxValue }}</td>
+                <td style="text-align:left">{{ minComplexity }}</td>
+                <td style="text-align:right">{{ maxComplexity }}</td>
             </tr>
             <tr>
                 <td colspan="2">
                     <input
                         type="range"
-                        :min="minValue" :max="maxValue" :value="value"
+                        :min="minComplexity" :max="maxComplexity" :value="complexity"
                         v-on:input="(event) => onInput(event)"
                     >
                 </td>
             </tr>
             <tr>
-                <td colspan="2" id="duration-message" style="text-align:center">{{ message }}</td>
+                <td colspan="2" id="duration-message" style="text-align:center">Complexity {{ complexity }}</td>
             </tr>
         </tbody>
     </table>
@@ -23,25 +23,15 @@
 
 <script>
 import store from '../store.js'
+import { mapState } from 'vuex'
 
 export default {
-    props: ['params'],
     computed: {
-        message() {
-            return `Complexity ${this.value}`
-        }
-    },
-    data() {
-        return {
-            value: store.getters.complexity,
-            minValue: store.getters.minComplexity,
-            maxValue: store.getters.maxComplexity,
-        }
+        ...mapState(['complexity', 'minComplexity', 'maxComplexity']),
     },
     methods: {
         onInput(event) {
             store.commit('changeComplexity', event.target.value)
-            this.value = store.getters.complexity
         }
     }
 }

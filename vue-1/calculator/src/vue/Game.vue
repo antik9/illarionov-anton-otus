@@ -1,7 +1,7 @@
 <template>
     <div>
-        <container-app /><br />
-        <timer-app />
+        <ContainerApp /><br />
+        <TimerApp />
     </div>
 </template>
 
@@ -11,8 +11,8 @@ import TimerApp from './Timer.vue'
 
 export default {
     components: {
-        'container-app': ContainerApp,
-        'timer-app': TimerApp,
+        ContainerApp,
+        TimerApp,
     }
 }
 </script>

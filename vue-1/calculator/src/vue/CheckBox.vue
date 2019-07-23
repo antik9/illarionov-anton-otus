@@ -9,7 +9,7 @@
 import store from '../store.js'
 
 export default {
-    props: ['label', 'checked', 'params'],
+    props: ['label', 'checked'],
     methods: {
         onClick(event) {
             if (event.target.checked) {

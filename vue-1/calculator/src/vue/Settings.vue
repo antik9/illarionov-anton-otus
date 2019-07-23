@@ -1,19 +1,20 @@
 <template>
     <div>
-        <greeting-app />
+        <GreetingApp />
         <h2>Settings</h2>
-        <timerange-app />
-        <complexity-app /><br />
-        <checkbox-app label="Addition" :checked="store.getters.checkedAddition"/>
-        <checkbox-app label="Subtraction" :checked="store.getters.checkedSubtraction"/>
-        <checkbox-app label="Multiplication" :checked="store.getters.checkedMultiplication"/>
-        <checkbox-app label="Division" :checked="store.getters.checkedDivision"/>
+        <TimeRangeApp />
+        <ComplexityRangeApp /><br />
+        <CheckBoxApp label="Addition" :checked="checkedAddition"/>
+        <CheckBoxApp label="Subtraction" :checked="checkedSubtraction"/>
+        <CheckBoxApp label="Multiplication" :checked="checkedMultiplication"/>
+        <CheckBoxApp label="Division" :checked="checkedDivision"/>
         <br />
         <button v-on:click="startGame()">Play</button><br />
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CheckBoxApp from './CheckBox.vue'
 import ComplexityRangeApp from './ComplexityRange.vue'
 import GreetingApp from './Greeting.vue'
@@ -22,16 +23,17 @@ import router from '../router.js'
 import store from '../store.js'
 
 export default {
-    data() {
-        return {
-            store: store,
-        }
+    computed: {
+        ...mapGetters([
+            'checkedAddition', 'checkedSubtraction',
+            'checkedMultiplication', 'checkedDivision'
+        ]),
     },
     components: {
-        'checkbox-app': CheckBoxApp,
-        'complexity-app': ComplexityRangeApp,
-        'greeting-app': GreetingApp,
-        'timerange-app': TimeRangeApp,
+        CheckBoxApp,
+        ComplexityRangeApp,
+        GreetingApp,
+        TimeRangeApp,
     },
     methods: {
         startGame() {

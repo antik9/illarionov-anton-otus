@@ -2,7 +2,7 @@
     <div>
         <div v-on:click='goBack()' style="font-size:20px;border-style:solid;width:40px;text-align:center">⇦</div><br />
         <div style="font-size:16px">
-            Your result: {{ store.getters.rights }} right and {{ store.getters.wrongs }} wrong
+            Your result: {{ rights }} right and {{ wrongs }} wrong
         </div><br />
         <div style="font-size:22px;text-align:center;width:210px;color:black;border-style:dashed;border-radius:10px;border-width:1px;border-color:#ccc">
             <span style="color: #f77">{{ value1 }}</span>
@@ -15,13 +15,13 @@
             <tbody>
                 <tr v-for="row in [0, 1, 2]">
                     <td v-for="value in [1, 2, 3]">
-                        <callback-app :value="row * 3 + value" :callback="setValue" color="#f7c9ab"/>
+                        <CallbackApp :value="row * 3 + value" :callback="setValue" color="#f7c9ab"/>
                     </td>
                 </tr>
                 <tr>
-                    <td><callback-app value="del" :callback="delNumber" color="#e7e9ea"/></td>
-                    <td><callback-app value="0" :callback="setValue" color="#f7c9ab"/></td>
-                    <td><callback-app value="check" :callback="check" color="#e7e9ea"/></td>
+                    <td><CallbackApp value="del" :callback="delNumber" color="#e7e9ea"/></td>
+                    <td><CallbackApp value="0" :callback="setValue" color="#f7c9ab"/></td>
+                    <td><CallbackApp value="check" :callback="check" color="#e7e9ea"/></td>
                 </tr>
             </tbody>
         </table>
@@ -29,21 +29,16 @@
 </template>
 
 <script>
-import CallbackApp from './Callback.vue';
+import { mapState } from 'vuex'
+import CallbackApp from './Callback.vue'
 import router from '../router.js'
 import store from '../store.js'
 
 export default {
-    data() {
-        return {
-            store: store,
-        }
-    },
     computed: {
-        value1() { return store.getters.value1 },
-        value2() { return store.getters.value2 },
-        result() { return store.getters.result },
-        operation() { return store.getters.operation },
+        ...mapState([
+            'value1', 'value2', 'result', 'operation', 'rights', 'wrongs', 'finished',
+        ]),
     },
     methods: {
         setValue(number) {
@@ -54,16 +49,17 @@ export default {
         },
         check() {
             store.commit('check')
-            if ( !store.getters.finished )
+            store.commit('save')
+            if ( !this.finished )
                 store.commit('initTask')
         },
         goBack() {
             store.commit('finished')
             router.push({path: '/'})
         },
-   },
+    },
     components: {
-        'callback-app': CallbackApp,
+        CallbackApp,
     },
     mounted() {
         store.commit('initTask')
