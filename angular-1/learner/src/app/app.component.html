@@ -1,0 +1,19 @@
+<h2>Recently Added</h2>
+<div>{{ currentDate }}</div><br/>
+<div class="frame">
+    <div *ngFor="let item of words | keyvalue">{{ item.key }} - {{ item.value }}</div>
+</div><br/>
+<table>
+    <thead>
+        <tr>
+            <th>Source</th>
+            <th>Translation</th>
+        </tr>
+    </thead>
+    <tr>
+        <td><input [value]="newWord" (input)="newWord = $event.target.value"></td>
+        <td><input [value]="translation" (input)="translation = $event.target.value"></td>
+    </tr>
+</table>
+
+<button (click)="addWord()">Add New</button>

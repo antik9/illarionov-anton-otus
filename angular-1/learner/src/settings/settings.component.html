@@ -1,0 +1,21 @@
+<h2>Settings</h2>
+<table>
+    <tr>
+        <td>Language</td>
+        <td>
+            <select (change)="onLanguageChange($event)">
+                <option *ngFor="let lang of languages">{{ lang }}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Number of words</td>
+        <td>
+            <select (change)="onNumberChange($event)">
+                <option *ngFor="let num of numberOfWords">{{ num }}</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+<button (click)="saveSettings()">Save</button>
