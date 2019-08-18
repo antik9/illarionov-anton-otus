@@ -3,7 +3,7 @@
     <tr>
         <td>Language</td>
         <td>
-            <select (change)="onLanguageChange($event)">
+            <select (change)="onLanguageChange($event)" [(value)]="choosenLanguage">
                 <option *ngFor="let lang of languages">{{ lang }}</option>
             </select>
         </td>
@@ -11,7 +11,7 @@
     <tr>
         <td>Number of words</td>
         <td>
-            <select (change)="onNumberChange($event)">
+            <select (change)="onNumberChange($event)" [(value)]="choosenNumber">
                 <option *ngFor="let num of numberOfWords">{{ num }}</option>
             </select>
         </td>

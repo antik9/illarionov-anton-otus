@@ -12,10 +12,15 @@ export class GameComponent {
     title = 'learner';
     word = nextWord();
     translation = '';
-    next = () => {
-        if ( this.translation !== words[this.word] )
-            alert(`The answer is ${words[this.word]}`);
+    rightAnswer = '';
+    colored = 'green';
+    next = async () => {
+        this.rightAnswer = words[this.word];
+        let right = this.rightAnswer === this.translation;
+        this.colored =  right ? 'green' : 'red';
+        await new Promise(done => setTimeout(() => done(), 1200));
         this.translation = '';
         this.word = nextWord();
+        this.rightAnswer = '';
     };
 }

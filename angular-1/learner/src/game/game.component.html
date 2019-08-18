@@ -1,4 +1,5 @@
 <h2>{{ word }}</h2>
-<td><input [value]="translation" (input)="translation = $event.target.value"></td>
+<input [value]="translation" (input)="translation = $event.target.value">
 
 <button (click)="next()">Next</button>
+<div class="topMargin">Right answer: <span [class]="colored">{{ rightAnswer }}</span></div>

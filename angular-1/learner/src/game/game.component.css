@@ -3,3 +3,15 @@
     height:60px;
     overflow-y:scroll;
 }
+
+.topMargin {
+    margin-top: 20px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
