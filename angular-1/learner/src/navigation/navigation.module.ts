@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { NavigationComponent } from './navigation.component';
@@ -16,7 +17,8 @@ import { SettingsComponent } from '../settings/settings.component';
   ],
   imports: [
     BrowserModule,
-    NavigationRoutingModule
+    NavigationRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [NavigationComponent]

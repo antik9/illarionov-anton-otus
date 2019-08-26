@@ -7,13 +7,11 @@
     <thead>
         <tr>
             <th>Source</th>
-            <th>Translation</th>
         </tr>
     </thead>
     <tr>
         <td><input [value]="newWord" (input)="newWord = $event.target.value"></td>
-        <td><input [value]="translation" (input)="translation = $event.target.value"></td>
+        <td><button (click)="addBagOfWords()">Add New</button></td>
     </tr>
 </table>
 
-<button (click)="addWord()">Add New</button>

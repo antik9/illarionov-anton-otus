@@ -16,6 +16,12 @@
             </select>
         </td>
     </tr>
+    <tr>
+        <td>Yandex API key</td>
+        <td>
+            <input [value]="apiKey" (input)="apiKey = $event.target.value">
+        </td>
+    </tr>
 </table>
 
 <button (click)="saveSettings()">Save</button>

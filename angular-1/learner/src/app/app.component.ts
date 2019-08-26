@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import words from './words';
+import { WordService } from './word.service';
+import { TranslatorService } from './translator.service';
 
 function formatDate(date: Date): string {
     const monthNames = [
@@ -17,16 +18,30 @@ function formatDate(date: Date): string {
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    providers: [WordService, TranslatorService]
 })
 export class AppComponent {
-    title = 'learner';
-    currentDate = formatDate(new Date());
-    newWord = '';
-    translation = '';
-    words = words;
-    addWord = () => {
-        this.words[this.newWord] = this.translation;
-        this.newWord = this.translation = '';
-    };
+    constructor(
+        private wordService: WordService,
+        private translatorService: TranslatorService
+    ) {
+        this.getWords();
+        this.subscription = this.wordService.wordChange.subscribe(() => this.getWords());
+    }
+
+    title = 'learner'
+    currentDate = formatDate(new Date())
+    newWord = ''
+    subscription: any
+    words: any
+
+    getWords = () => {
+        this.words = this.wordService.getWords();
+    }
+    addBagOfWords = () => {
+        this.wordService.addBagOfWords(this.newWord);
+        this.getWords();
+        this.newWord = '';
+    }
 }
