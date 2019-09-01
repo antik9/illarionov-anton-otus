@@ -11,6 +11,17 @@ export class TranslatorService {
 
     translateWord(word: string) {
         let key = this.settings.getSettings()['apiKey'];
-        return this.httpClient.get(this.baseUrl + `key=${key}&text=${word}&lang=ru`)
+        let language = this.settings.getSettings()['choosenLanguage'];
+        let fromLang = 'en';
+
+        switch(language) {
+            case 'French': fromLang = 'fr'; break;
+            case 'German': fromLang = 'de'; break;
+            case 'Spanish': fromLang = 'es'; break;
+            default: fromLang = 'en';
+        }
+        return this.httpClient.get(
+            this.baseUrl + `key=${key}&text=${word}&lang=${fromLang}-ru`
+        );
     }
 }

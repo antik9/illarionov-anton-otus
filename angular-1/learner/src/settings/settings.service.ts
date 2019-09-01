@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SettingsService {
-    languages = ["English", "French", "German", "Russian"]
+    languages = ["English", "French", "German", "Spanish"]
     numberOfWords = [5, 10, 15, 20]
     private storage = { }
     constructor() {
@@ -13,9 +13,11 @@ export class SettingsService {
             choosenNumber: 5,
             apiKey: '',
         }
+        localStorage['settings'] = JSON.stringify(this.storage);
     }
 
     getSettings = () => {
+        this.storage = JSON.parse(localStorage.getItem('settings'));
         return this.storage;
     }
     set = (key: string, value: any) => {
