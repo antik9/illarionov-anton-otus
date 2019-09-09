@@ -4,21 +4,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { NavigationComponent } from './navigation.component';
-import { AppComponent } from '../app/app.component';
-import { GameComponent } from '../game/game.component';
-import { SettingsComponent } from '../settings/settings.component';
+import { AppModule } from '../app/app.module';
+import { GameModule } from '../game/game.module';
+import { SettingsModule } from '../settings/settings.module';
 
 @NgModule({
   declarations: [
     NavigationComponent,
-    AppComponent,
-    GameComponent,
-    SettingsComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     NavigationRoutingModule,
     HttpClientModule,
+    AppModule,
+    GameModule,
+    SettingsModule,
   ],
   providers: [],
   bootstrap: [NavigationComponent]
