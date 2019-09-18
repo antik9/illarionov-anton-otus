@@ -1,0 +1,6 @@
+<h2>{{ word }}</h2>
+<input [value]="translation" (input)="translation = $event.target.value">
+
+<button (click)="next()">{{ buttonText }}</button>
+<div class="topMargin">Right answer: <span [class]="colored">{{ rightAnswer }}</span></div>
+<div class="isOver">{{ isOverMessage }}</div>
